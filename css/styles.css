@@ -1,0 +1,17 @@
+:root{
+  --ink-black: hsla(202, 85%, 8%, 1);
+  --teal: hsla(187, 32%, 41%, 1);
+  --muted-teal: hsla(169, 24%, 57%, 1);
+  --ash-grey: hsla(169, 12%, 34%, 1);
+  --vanilla-cream: hsla(43, 64%, 88%, 1);
+}
+body{
+  background-color: var(--ash-grey)
+}
+
+
+.flexcol{
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
