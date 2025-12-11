@@ -15,7 +15,7 @@ async function getData () {
       options
     )
     const data = await res.json()
-    console.log(data)
+    return data
   } catch (err) {
     console.error(err)
   }
@@ -27,12 +27,12 @@ async function getTopRatedMoviesData () {
       options
     )
     const data = await res.json()
-    console.log(data)
+    return data
   } catch (err) {
     console.error(err)
   }
 }
-async function getTopRatedTvData (input) {
+async function getListData (input) {
   try {
     const res = await fetch(
       `https://api.themoviedb.org/3/${input}/top_rated?language=en-US&page=1`,
@@ -51,10 +51,10 @@ async function getSearchedMovie (input) {
       options
     )
     const data = await res.json()
-    console.log(data)
+    return data
   } catch (err) {
     console.error(err)
   }
 }
 
-export { getData, getTopRatedMoviesData, getTopRatedTvData, getSearchedMovie }
+export { getData, getTopRatedMoviesData, getListData, getSearchedMovie }

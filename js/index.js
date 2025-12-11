@@ -1,7 +1,7 @@
 import {
   getData,
   getTopRatedMoviesData,
-  getTopRatedTvData,
+  getListData,
   getSearchedMovie
 } from './getscripts.js'
 import { renderTopList, topListDisplay } from './gui.js'
@@ -12,13 +12,13 @@ topListSelector.addEventListener('change', event => {
   console.log('selected', selectedValue)
   console.log(event.target.value)
   topListDisplay.innerHTML = ''
-  getTopRatedTvData(event.target.value).then(renderTopList)
+  getListData(event.target.value).then(renderTopList)
 })
 
 console.log(selectedValue)
 
-getData()
-getTopRatedMoviesData()
+// getData()
+// getTopRatedMoviesData()
 
 export { selectedValue }
 // getTopRatedTvData(topListSelector).then(renderTopList)
