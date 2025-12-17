@@ -11,25 +11,30 @@
     <header class="flexcol">
       <h1 class="felxcol">Slutprojekt: Moviedatabase</h1>
     </header>
-    <main>
-      <form class="flexcol">
-        <input type="text" name="search" id="searchbar" />
-        <select name="" id="">
-          <option value="movie">Movie</option>
-          <option value="tv">Tv series</option>
-          <option value="person">Person</option>
-        </select>
-        <button id="submit">Search</button>
-      </form>
-      <div name="toplists">
-        <form action="" id="">
-          <select name="toplistselector" id="toplistselector">
-            <option value=""></option>
-            <option value="movie">Top 10 movies</option>
-            <option value="tv">Top 10 Tv-Series</option>
+    <main class="">
+      <article>
+        <div name="toplists">
+          <form action="" id="">
+            <select name="toplistselector" id="toplistselector">
+              <option value=""></option>
+              <option value="movie">Top 10 rated movies</option>
+              <option value="popular">Top 10 popular movies</option>
+              <option value="tv">Top 10 Tv-Series</option>
+            </select>
+          </form>
+          <div id="toplistdisplaybox" class=""></div>
+        </div>
+      </article>
+      <div class="flex-column">
+        <form class="flexcol" id="search">
+          <input type="text" name="search" id="searchbar" />
+          <select name="" id="searchcatagory">
+            <option value="movie">Movie</option>
+            <option value="person">Person</option>
           </select>
+          <button id="submit">Search</button>
         </form>
-        <div id="toplistdisplaybox" class=""></div>
+        <div id="searchresult"></div>
       </div>
     </main>
   </body>

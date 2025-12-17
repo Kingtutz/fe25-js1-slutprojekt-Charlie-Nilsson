@@ -8,11 +8,18 @@
 body{
   background-color: var(--ash-grey)
 }
+main {
+  display: flex ;
 
+}
+article{
+  justify-self: start;
+}
 
 .flexcol{
   display: flex;
   justify-content: center;
+  justify-self: center;
   gap: 8px;
 }
 #toplistdisplaybox{
