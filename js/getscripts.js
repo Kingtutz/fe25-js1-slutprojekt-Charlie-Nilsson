@@ -36,9 +36,7 @@ async function getSearched (searchInput, catagory) {
       `https://api.themoviedb.org/3/search/${searchInput}?query=${catagory}&include_adult=false&language=en-US&page=1`,
       options
     )
-    console.log(res)
     const data = await res.json()
-    console.log(data)
     return data
   } catch (err) {
     console.error(err)

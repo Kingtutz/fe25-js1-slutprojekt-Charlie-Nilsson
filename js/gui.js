@@ -42,7 +42,6 @@ async function renderTopList (data) {
 
 async function renderSearchedresults (data) {
   const results = data.results
-  console.log(results)
   if (searchCatagory.value === 'person') {
     results.forEach(result => {
       const h3 = document.createElement('h3')
@@ -59,6 +58,15 @@ async function renderSearchedresults (data) {
       }
       img.classList.add('poster')
       pEl.innerText = 'Known for ' + result.known_for_department
+      result.known_for.forEach(known => {
+        const knownFor = document.createElement('p')
+        displayResult.append(knownFor)
+        if (known.media_type === 'movie') {
+          knownFor.innerText = known.media_type + ': ' + known.original_title
+        } else {
+          knownFor.innerText = known.media_type + ': ' + known.name
+        }
+      })
     })
   } else {
     results.forEach(result => {

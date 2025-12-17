@@ -12,31 +12,26 @@ searchForm.addEventListener('submit', event => {
     getSearched(searchCatagory.value, searchBar.value).then(
       renderSearchedresults
     )
-    console.log(searchForm.value)
-    console.log(searchBar.value)
-    console.log(searchCatagory.value)
+    
   } else if (searchCatagory.value === 'person') {
     displayResult.innerHTML = ''
     getSearched(searchCatagory.value, searchBar.value).then(
       renderSearchedresults
     )
-    console.log(searchForm.value)
-    console.log(searchBar.value)
-    console.log(searchCatagory.value)
+    
   }
 })
 
 const topListSelector = document.querySelector('#toplistselector')
 const topListDisplay = document.querySelector('#toplistdisplaybox')
 let selectedValue = topListSelector.value
+getListData(selectedValue).then(renderTopList)
 topListSelector.addEventListener('change', event => {
-  console.log('selected', selectedValue)
-  console.log(event.target.value)
   topListDisplay.innerHTML = ''
   getListData(event.target.value).then(renderTopList)
 })
 
-console.log(selectedValue)
+
 
 // getData()
 // getTopRatedMoviesData()

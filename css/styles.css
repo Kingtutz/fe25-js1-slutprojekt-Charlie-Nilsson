@@ -21,6 +21,8 @@ article{
   justify-content: center;
   justify-self: center;
   gap: 8px;
+  padding: 12px;
+  margin: 16px;
 }
 #toplistdisplaybox{
   padding-left: 20px;
