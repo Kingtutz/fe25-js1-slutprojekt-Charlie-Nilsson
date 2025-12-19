@@ -1,4 +1,8 @@
+import { searchError } from './error.js'
+import { selectedValue, topListSelector } from './index.js'
+
 const apiKey = 'da2b5ada6fc011b0593f9808478118ac'
+const baseUrl = `https://api.themoviedb.org/3/`
 
 const options = {
   method: 'GET',
@@ -11,35 +15,64 @@ const options = {
 
 async function getListData (input) {
   try {
-    if (input === 'movie' || input === 'tv') {
+    if (topListSelector.value === 'movie' || topListSelector.value === 'tv') {
       const res = await fetch(
-        `https://api.themoviedb.org/3/${input}/top_rated?language=en-US&page=1`,
+        baseUrl + `${input}/top_rated?language=en-US&page=1`,
         options
       )
+      if (!res.ok) {
+        throw error
+      }
       const data = await res.json()
       return data
-    } else if (input === `popular`) {
+    } else if (
+      topListSelector.value === 'popular' ||
+      topListSelector.value === 'upcoming'
+    ) {
       const res = await fetch(
-        `https://api.themoviedb.org/3/movie/popular?language=en-US&page=1`,
+        baseUrl + `movie/${input}?language=en-US&page=1`,
         options
       )
+      if (!res.ok) {
+        throw error
+      }
+      const data = await res.json()
+      return data
+    } else if (topListSelector.value === `trending`) {
+      const res = await fetch(
+        baseUrl + `trending/all/day?language=en-US`,
+        options
+      )
+      if (!res.ok) {
+        throw error
+      }
       const data = await res.json()
       return data
     }
-  } catch (err) {
-    console.error(err)
+  } catch (error) {
+    console.error(error)
+    throw error
   }
 }
 async function getSearched (searchInput, catagory) {
   try {
     const res = await fetch(
-      `https://api.themoviedb.org/3/search/${searchInput}?query=${catagory}&include_adult=false&language=en-US&page=1`,
+      baseUrl +
+        `search/${searchInput}?query=${catagory}&include_adult=false&language=en-US&page=1`,
       options
     )
+    if (!res.ok) {
+      throw error
+    }
+
     const data = await res.json()
-    return data
-  } catch (err) {
-    console.error(err)
+    if (data.total_results === 0) {
+      throw 'searcherror'
+    } else {
+      return data
+    }
+  } catch (error) {
+    throw error
   }
 }
 

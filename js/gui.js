@@ -1,43 +1,27 @@
-import {
-  selectedValue,
-  topListDisplay,
-  displayResult,
-  searchCatagory
-} from './index.js'
+import { topListDisplay, displayResult, searchCatagory } from './index.js'
 
 const imgUrl = `https://image.tmdb.org/t/p/original`
 
 async function renderTopList (data) {
-  console.log(data)
-  console.log('selectvalueinrender', selectedValue)
   const results = data.results.slice(0, 10)
-  if (data.total_pages < 500) {
-    results.forEach(result => {
-      const h3 = document.createElement('h3')
-      const pEl = document.createElement('p')
-      const img = document.createElement('img')
-      topListDisplay.append(h3)
-      topListDisplay.append(img)
-      topListDisplay.append(pEl)
+
+  results.forEach(result => {
+    const h3 = document.createElement('h3')
+    const pEl = document.createElement('p')
+    const img = document.createElement('img')
+    topListDisplay.append(h3)
+    topListDisplay.append(img)
+    topListDisplay.append(pEl)
+    if (result.name) {
       h3.innerText = result.name
-      img.src = imgUrl + result.poster_path
-      img.classList.add('poster')
       pEl.innerText = 'First air day: ' + result.first_air_date
-    })
-  } else {
-    results.forEach(result => {
-      const h5 = document.createElement('h5')
-      const pEl = document.createElement('p')
-      const img = document.createElement('img')
-      topListDisplay.append(h5)
-      topListDisplay.append(img)
-      topListDisplay.append(pEl)
-      h5.innerText = result.title
+    } else {
+      h3.innerText = result.title
       pEl.innerText = 'Realese date: ' + result.release_date
-      img.src = imgUrl + result.poster_path
-      img.classList.add('poster')
-    })
-  }
+    }
+    img.src = imgUrl + result.poster_path
+    img.classList.add('poster')
+  })
 }
 
 async function renderSearchedresults (data) {
@@ -58,15 +42,17 @@ async function renderSearchedresults (data) {
       }
       img.classList.add('poster')
       pEl.innerText = 'Known for ' + result.known_for_department
-      result.known_for.forEach(known => {
-        const knownFor = document.createElement('p')
-        displayResult.append(knownFor)
-        if (known.media_type === 'movie') {
-          knownFor.innerText = known.media_type + ': ' + known.original_title
-        } else {
-          knownFor.innerText = known.media_type + ': ' + known.name
-        }
-      })
+      if (searchCatagory.value === 'person') {
+        result.known_for.forEach(known => {
+          const knownFor = document.createElement('p')
+          displayResult.append(knownFor)
+          if (known.media_type === 'movie') {
+            knownFor.innerText = known.media_type + ': ' + known.original_title
+          } else {
+            knownFor.innerText = known.media_type + ': ' + known.name
+          }
+        })
+      }
     })
   } else {
     results.forEach(result => {

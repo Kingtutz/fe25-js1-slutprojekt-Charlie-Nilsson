@@ -10,7 +10,6 @@ body{
 }
 main {
   display: flex ;
-
 }
 article{
   justify-self: start;
@@ -20,9 +19,8 @@ article{
   display: flex;
   justify-content: center;
   justify-self: center;
-  gap: 8px;
-  padding: 12px;
-  margin: 16px;
+ justify-items: center;
+
 }
 #toplistdisplaybox{
   padding-left: 20px;
@@ -35,4 +33,18 @@ article{
 }
 .poster{
   width: 150px;
+}
+#searchresult{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 8px;
+}
+#search{
+  display: flex;
+  justify-self: center;
+  gap: 8px;
+  align-items: center;
+
 }
