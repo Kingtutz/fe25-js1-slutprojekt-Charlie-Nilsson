@@ -1,5 +1,5 @@
 import { getListData, getSearched } from './getscripts.js'
-import { renderTopList, renderSearchedresults } from './gui.js'
+import { renderTopList,renderSearchedResults } from './gui.js'
 import { searchError } from './error.js'
 import { clickedTitle } from './animate.js'
 
@@ -15,11 +15,12 @@ let selectedValue = topListSelector.value
 title.addEventListener('click', event => {
   clickedTitle()
 })
+
 searchForm.addEventListener('submit', event => {
   event.preventDefault()
     displayResult.innerHTML = ''
     getSearched(searchCatagory.value, searchBar.value)
-      .then(renderSearchedresults)
+      .then(renderSearchedResults)
       .then(clickedTitle)
       .catch(searchError)
 })

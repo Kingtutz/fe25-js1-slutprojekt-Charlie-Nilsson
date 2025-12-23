@@ -24,25 +24,34 @@ async function renderTopList (data) {
   })
 }
 
-async function renderSearchedresults (data) {
+async function renderSearchedResults (data) {
   const results = data.results
-  console.log(searchCatagory.value)
-  if (searchCatagory.value === 'person') {
-    results.forEach(result => {
-      const h3 = document.createElement('h3')
-      const pEl = document.createElement('p')
-      const img = document.createElement('img')
-      displayResult.append(h3)
-      displayResult.append(img)
-      displayResult.append(pEl)
-      h3.innerText = result.name
-      if (!result.profile_path) {
-        img.src = '../img/No-Image-Placeholder.svg'
-      } else {
-        img.src = imgUrl + result.profile_path
-      }
-      img.classList.add('poster')
-      pEl.innerText = 'Known for ' + result.known_for_department
+  results.forEach(result => {
+    const titleEl = document.createElement('h3')
+    const posterEl = document.createElement('img')
+    const overview = document.createElement('p')
+    const release_date = document.createElement('p')
+    const title =
+      result.original_title || result.name || result.title || 'Unknown title'
+    const poster = result.poster_path || result.profile_path
+    displayResult.append(titleEl)
+    displayResult.append(posterEl)
+    displayResult.append(overview)
+    displayResult.append(release_date)
+    titleEl.innerText = title.toUpperCase()
+    if (!result.poster_path && !result.profile_path) {
+      posterEl.src = '../img/No-Image-Placeholder.svg'
+    } else {
+      posterEl.src = imgUrl + poster
+    }
+    posterEl.classList.add('poster')
+    if (searchCatagory.value === 'movie') {
+      overview.innerText = result.overview
+      overview.classList.add('poster')
+      release_date.innerText = 'Realese date: ' + result.release_date
+    }
+    if (searchCatagory.value === 'person') {
+      overview.innerText = 'Known for ' + result.known_for_department
       result.known_for.forEach(known => {
         const knownFor = document.createElement('p')
         displayResult.append(knownFor)
@@ -52,33 +61,8 @@ async function renderSearchedresults (data) {
           knownFor.innerText = known.media_type + ': ' + known.name
         }
       })
-    })
-  } else {
-    results.forEach(result => {
-      const h3 = document.createElement('h3')
-      const overview = document.createElement('p')
-      const release_date = document.createElement('p')
-      const img = document.createElement('img')
-      displayResult.append(h3)
-      displayResult.append(img)
-      displayResult.append(overview)
-      displayResult.append(release_date)
-      h3.innerText = result.original_title
-      overview.innerText = result.overview
-      release_date.innerText = 'Realese date: ' + result.release_date
-      const title =
-        result.original_title || result.name || result.title || 'Unknown title'
-      h3.innerText = title
-
-      if (!result.poster_path) {
-        img.src = '../img/No-Image-Placeholder.svg'
-      } else {
-        img.src = imgUrl + result.poster_path
-      }
-
-      img.classList.add('poster')
-    })
-  }
+    }
+  })
 }
 
-export { renderTopList, renderSearchedresults }
+export { renderTopList, renderSearchedResults }
