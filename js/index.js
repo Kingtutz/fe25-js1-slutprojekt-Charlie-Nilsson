@@ -11,29 +11,27 @@ let searchBar = document.querySelector('#searchbar')
 const topListSelector = document.querySelector('#toplistselector')
 const topListDisplay = document.querySelector('#toplistdisplaybox')
 let selectedValue = topListSelector.value
+
 title.addEventListener('click', event => {
   clickedTitle()
 })
 searchForm.addEventListener('submit', event => {
   event.preventDefault()
-  if (searchCatagory.value === 'movie') {
     displayResult.innerHTML = ''
     getSearched(searchCatagory.value, searchBar.value)
       .then(renderSearchedresults)
+      .then(clickedTitle)
       .catch(searchError)
-  } else if (searchCatagory.value === 'person') {
-    displayResult.innerHTML = ''
-    getSearched(searchCatagory.value, searchBar.value)
-      .then(renderSearchedresults)
-      .catch(searchError)
-  }
 })
 
 getListData(selectedValue).then(renderTopList)
 
 topListSelector.addEventListener('change', event => {
   topListDisplay.innerHTML = ''
-  getListData(event.target.value).then(renderTopList).catch(searchError)
+  getListData(event.target.value)
+    .then(renderTopList)
+    .then(clickedTitle)
+    .catch(searchError)
 })
 
 export {

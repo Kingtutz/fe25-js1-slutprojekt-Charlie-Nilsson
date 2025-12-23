@@ -1,5 +1,4 @@
-import { searchError } from './error.js'
-import { selectedValue, topListSelector } from './index.js'
+import { topListSelector } from './index.js'
 
 const apiKey = 'da2b5ada6fc011b0593f9808478118ac'
 const baseUrl = `https://api.themoviedb.org/3/`
@@ -64,7 +63,6 @@ async function getSearched (searchInput, catagory) {
     if (!res.ok) {
       throw error
     }
-
     const data = await res.json()
     if (data.total_results === 0) {
       throw 'searcherror'

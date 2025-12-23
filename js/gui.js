@@ -26,6 +26,7 @@ async function renderTopList (data) {
 
 async function renderSearchedresults (data) {
   const results = data.results
+  console.log(searchCatagory.value)
   if (searchCatagory.value === 'person') {
     results.forEach(result => {
       const h3 = document.createElement('h3')
@@ -42,17 +43,15 @@ async function renderSearchedresults (data) {
       }
       img.classList.add('poster')
       pEl.innerText = 'Known for ' + result.known_for_department
-      if (searchCatagory.value === 'person') {
-        result.known_for.forEach(known => {
-          const knownFor = document.createElement('p')
-          displayResult.append(knownFor)
-          if (known.media_type === 'movie') {
-            knownFor.innerText = known.media_type + ': ' + known.original_title
-          } else {
-            knownFor.innerText = known.media_type + ': ' + known.name
-          }
-        })
-      }
+      result.known_for.forEach(known => {
+        const knownFor = document.createElement('p')
+        displayResult.append(knownFor)
+        if (known.media_type === 'movie') {
+          knownFor.innerText = known.media_type + ': ' + known.original_title
+        } else {
+          knownFor.innerText = known.media_type + ': ' + known.name
+        }
+      })
     })
   } else {
     results.forEach(result => {
@@ -66,7 +65,10 @@ async function renderSearchedresults (data) {
       displayResult.append(release_date)
       h3.innerText = result.original_title
       overview.innerText = result.overview
-      release_date.innerText = 'Release date: ' + result.release_date
+      release_date.innerText = 'Realese date: ' + result.release_date
+      const title =
+        result.original_title || result.name || result.title || 'Unknown title'
+      h3.innerText = title
 
       if (!result.poster_path) {
         img.src = '../img/No-Image-Placeholder.svg'
