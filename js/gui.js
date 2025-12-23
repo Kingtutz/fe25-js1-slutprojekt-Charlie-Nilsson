@@ -1,6 +1,7 @@
 import { topListDisplay, displayResult, searchCatagory } from './index.js'
 
 const imgUrl = `https://image.tmdb.org/t/p/original`
+const noImg = '../img/No-Image-Placeholder.svg'
 
 async function renderTopList (data) {
   const results = data.results.slice(0, 10)
@@ -19,7 +20,11 @@ async function renderTopList (data) {
       h3.innerText = result.title
       pEl.innerText = 'Realese date: ' + result.release_date
     }
-    img.src = imgUrl + result.poster_path
+    if (!result.poster_path && !result.profile_path) {
+      img.src = noImg
+    } else {
+      img.src = imgUrl + result.poster_path
+    }
     img.classList.add('poster')
   })
 }
@@ -40,7 +45,7 @@ async function renderSearchedResults (data) {
     displayResult.append(release_date)
     titleEl.innerText = title.toUpperCase()
     if (!result.poster_path && !result.profile_path) {
-      posterEl.src = '../img/No-Image-Placeholder.svg'
+      posterEl.src = noImg
     } else {
       posterEl.src = imgUrl + poster
     }
